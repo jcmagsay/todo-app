@@ -16,6 +16,10 @@ export default class Checkbox extends Component {
   constructor() {
     super();
 
+    this.setupHandlers();
+  }
+
+  setupHandlers() {
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
 

@@ -25,6 +25,10 @@ export default class TodoCard extends Component {
       value: ''
     };
 
+    this.setupHandlers();
+  }
+
+  setupHandlers() {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleSave = this.handleSave.bind(this);
