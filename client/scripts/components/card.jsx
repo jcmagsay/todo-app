@@ -13,6 +13,12 @@ export default class Card extends Component {
 
   constructor() {
     super();
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.delete(this.props.id)
   }
 
   render() {
@@ -25,6 +31,11 @@ export default class Card extends Component {
           Status: {this.props.done ? 'Complete': 'Incomplete'}
         </p>
         {this.props.children}
+        <div className="{styles.actions}">
+          <button className={styles.button} onClick={this.handleClick}>
+            Remove
+          </button>
+        </div>
       </div>
     );
   }

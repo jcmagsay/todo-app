@@ -23,18 +23,48 @@ a {
 
 button {
   appearance: none;
-  background: $COLOR_TRANSPARENT;
+  background: 0 0;
   border: none;
+  border-radius: .2rem;
+  color: #000;
   cursor: pointer;
   display: inline-block;
   font-family: 'Helvetica Neue', serif;
-  font-size: 1.6rem;
-  height: auto;
+  font-size: 1.4rem;
+  font-weight: 500;
+  height: 3.6rem;
+  letter-spacing: 0;
+  line-height: 3.6rem;
+  margin: 0;
+  min-width: 6.4rem;
   outline: none;
-  padding: 0;
+  overflow: hidden;
+  padding: 0 1.6rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  transition: box-shadow 0.2s cubic-bezier(0.4,0,1,1),background-color 0.2s cubic-bezier(0.4,0,.2,1),color 0.2s cubic-bezier(0.4,0,.2,1);
+  vertical-align: middle;
   width: auto;
+  will-change: box-shadow;
 }
 
+button::-moz-focus-inner {
+  border: 0
+}
+
+button:hover {
+  background-color: rgba(158,158,158,.2)
+}
+
+button:focus:not(:active) {
+  background-color: rgba(0,0,0,.12)
+}
+
+button:active {
+  background-color: rgba(158,158,158,.4)
+}
 li {
   list-style: none;
 }

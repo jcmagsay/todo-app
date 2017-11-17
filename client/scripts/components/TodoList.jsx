@@ -16,6 +16,7 @@ export default class TodoList extends Component {
           <li key={`todo-${todo.id}`}>
             <Card
               {...this.props}
+              id={todo.id}
               description={todo.description}
               done={todo.done}
             >
