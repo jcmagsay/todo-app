@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Checkbox from 'components/checkbox';
 import Textfield from 'components/textfield';
 import styles from 'styles/components/card';
 
@@ -85,10 +86,14 @@ export default class TodoCard extends Component {
           {this.state.isEditing ? 'Editing: ' : ''}
           {this.props.description}
         </h2>
-        <p className={styles.supportingText}>
-          Status: {this.props.done ? 'Complete': 'Incomplete'}
-        </p>
-        {this.props.children}
+        <div className={styles.supportingText}>
+          <Checkbox
+            {...this.props}
+            id={this.props.id}
+            description={`Status: ${this.props.done ? 'Complete': 'Incomplete'}`}
+            done={this.props.done}
+          />
+        </div>
         {(this.state.isEditing) ? this._renderEditView() : this._renderDefaultActions()}
       </div>
     );

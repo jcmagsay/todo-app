@@ -49,19 +49,19 @@ export default class App extends Component {
   }
 
   render() {
-    return([
-      <AddTodo
-        key="add-todo"
-        add={this.storeAdd}
-      />,
-      <TodoList
-        key="todo-list"
-        delete={this.storeDelete}
-        store={this.props.store}
-        todos={this.state.todos}
-        toggle={this.storeToggle}
-        update={this.storeUpdate}
-      />
-    ])
+    return(
+      <div className="utilities__flex utilities__flex--centered">
+        <AddTodo
+          add={this.storeAdd}
+        />
+        <TodoList
+          delete={this.storeDelete}
+          store={this.props.store}
+          todos={this.state.todos}
+          toggle={this.storeToggle}
+          update={this.storeUpdate}
+        />
+      </div>
+    );
   }
 }

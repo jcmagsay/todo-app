@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-
 import TodoCard from 'components/TodoCard';
-import Checkbox from 'components/checkbox';
 
 export default class TodoList extends Component {
   constructor() {
@@ -19,14 +17,7 @@ export default class TodoList extends Component {
               id={todo.id}
               description={todo.description}
               done={todo.done}
-            >
-              <Checkbox
-                {...this.props}
-                id={todo.id}
-                description={todo.description}
-                done={todo.done}
-              />
-            </TodoCard>
+            />
           </li>)}
         )}
       </ul>
