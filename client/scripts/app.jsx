@@ -25,8 +25,7 @@ export default class App extends Component {
   }
 
   storeAdd(text) {
-    this.props.store.dispatch('ADD', text);
-    this.props.store.dispatch('REFRESH', 'todos', this);
+    this.props.store.dispatch('POST', text, this);
   }
 
   storeDelete(id) {

@@ -64,6 +64,8 @@ const setItem = (key, value) => {
  * @method addItem
  */
 const addItem = (text) => {
+  this.props.store.dispatch('POST', {description: 'aosigjasjgiojsg'})
+
   const newItem = {
     id: sessionStorage.getItem(SESSION_STORAGE.NEXT_ID),
     description: text,
@@ -152,12 +154,24 @@ export function dispatch(event, item, scope) {
       break;
     case 'DELETE':
       deleteItem(item);
+      // service.deleteSingle({id: item})
+      //   .then(itemRemoved => {
+      //     scope.setState({
+      //       'todos': scope.state.todos.filter(todo => todo.id != itemRemoved.id)
+      //     })
+      //   });
       break;
     case 'TOGGLE':
       toggleItem(item);
       break;
     case 'UPDATE':
       updateItem(item);
+      break;
+    case 'POST':
+      service.create({ description: item })
+        .then(newTodo => {
+          scope.setState({'todos': scope.state.todos.concat(newTodo)})
+        });
       break;
     default:
       return;
