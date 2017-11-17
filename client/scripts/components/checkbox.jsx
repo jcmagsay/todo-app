@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+
 export default class Checkbox extends Component {
 
   static propTypes = {
@@ -25,7 +26,7 @@ export default class Checkbox extends Component {
       }
     );
 
-    this.props.handleChange(this, updatedObject);
+    this.props.update(this)
   }
 
   render() {

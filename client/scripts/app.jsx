@@ -1,79 +1,44 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import {fetch, add} from 'actions/index';
+import TodoList from 'components/TodoList';
 
-import FilterableTodoList from 'containers/FilterableTodoList'
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-const App = () => (
-  <FilterableTodoList />
-);
+    this.state = {
+      'todos': []
+    };
 
-export default App;
+    this.storeUpdate = this.storeUpdate.bind(this);
+  }
 
+  componentDidMount() {
+    this.getTodos();
+  }
 
-// export default class App extends Component {
-//   constructor(props) {
-//     super(props);
-//
-//     this.state = {
-//       'todos': []
-//     };
-//
-//     this.updateTodo = this.updateTodo.bind(this);
-//     this.todoService = new TodoService();
-//   }
-//
-//   componentDidMount() {
-//     this.getTodos();
-//   }
-//
-//
-//   getTodos() {
-//     this.todoService.getAll()
-//       .then(todos => {
-//         todos.forEach(todo => this.props.store.dispatch(add(todo)));
-//       });
-//     debugger;
-//   }
-//
-//   updateTodo(item) {
-//     this.props.store.dispatch(add)
-//   }
-//
-//   _renderTodos() {
-//     return this.state.todos.map(todo => {
-//       return (
-//         <li key={`todo-${todo.id}`}>
-//           <Card
-//             description={todo.description}
-//             done={todo.done}
-//           >
-//             <Checkbox
-//               id={todo.id}
-//               description={todo.description}
-//               done={todo.done}
-//               handleChange={this.updateTodo}
-//             />
-//           </Card>
-//         </li>
-//       )
-//     });
-//   }
-//
-//   render() {
-//     if (this.state.todos.length) {
-//       return([
-//         <main key="main">
-//           <ul>
-//             {this._renderTodos()}
-//           </ul>
-//         </main>
-//       ]);
-//     } else {
-//       return(
-//         <div>No todos found at this time.</div>
-//       );
-//     }
-//
-//   }
-// }
+  getTodos() {
+    this.props.store.dispatch('FETCH', 'todos', this)
+  }
+
+  storeUpdate(item) {
+    this.props.store.dispatch('TOGGLE', item)
+    this.props.store.dispatch('REFRESH', 'todos', this)
+  }
+
+  render() {
+    if (this.state.todos.length) {
+      return(
+        <TodoList
+          store={this.props.store}
+          todos={this.state.todos}
+          update={this.storeUpdate}
+        />
+      )
+    } else {
+      return(
+        <div>No todos found at this time.</div>
+      );
+    }
+
+  }
+}

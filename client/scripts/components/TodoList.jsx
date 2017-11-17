@@ -1,37 +1,29 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import {fetch, add} from 'actions/index';
 import PropTypes from 'prop-types'
 
 import Card from 'components/card';
 import Checkbox from 'components/checkbox';
 
-class TodoList extends Component {
-  constructor(todos, handleOnClick) {
-    super(todos, handleOnClick);
-  }
-
-  componentWillReceiveProps(props) {
-    debugger
+export default class TodoList extends Component {
+  constructor() {
+    super();
   }
 
   render() {
-    debugger;
-    if (typeof todos === 'undefined') return (<div>No todos available</div>);
-
     return(
       <ul>
-        {todos.map(todo =>
+        {this.props.todos.map(todo =>
           <li key={`todo-${todo.id}`}>
             <Card
+              {...this.props}
               description={todo.description}
               done={todo.done}
             >
               <Checkbox
+                {...this.props}
                 id={todo.id}
                 description={todo.description}
                 done={todo.done}
-                handleChange={this.updateTodo}
               />
             </Card>
           </li>
@@ -40,5 +32,3 @@ class TodoList extends Component {
     );
   }
 }
-
-export default TodoList
