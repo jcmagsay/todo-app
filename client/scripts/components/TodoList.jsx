@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 
-import Card from 'components/card';
+import TodoCard from 'components/TodoCard';
 import Checkbox from 'components/checkbox';
 
 export default class TodoList extends Component {
@@ -12,9 +12,9 @@ export default class TodoList extends Component {
   render() {
     return(
       <ul>
-        {this.props.todos.map(todo =>
-          <li key={`todo-${todo.id}`}>
-            <Card
+        {this.props.todos.map(todo =>{
+          return (<li key={`todo-${todo.id}`}>
+            <TodoCard
               {...this.props}
               id={todo.id}
               description={todo.description}
@@ -26,8 +26,8 @@ export default class TodoList extends Component {
                 description={todo.description}
                 done={todo.done}
               />
-            </Card>
-          </li>
+            </TodoCard>
+          </li>)}
         )}
       </ul>
     );

@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 export default class Checkbox extends Component {
 
   static propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     description: PropTypes.string,
     done: PropTypes.bool,
     handleChange: PropTypes.func
@@ -26,7 +29,7 @@ export default class Checkbox extends Component {
       }
     );
 
-    this.props.update(this)
+    this.props.toggle(this)
   }
 
   render() {

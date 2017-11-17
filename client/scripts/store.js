@@ -14,7 +14,7 @@ const fetch = (item, scope) => {
 const addItem = (text) => {
   let store = JSON.parse(sessionStorage.getItem('store'));
   const newItem = {
-    id: nextId,
+    id: sessionStorage.getItem('nextId'),
     description: text,
     done: false
   };
@@ -50,10 +50,22 @@ const refresh = (item, scope) => {
   scope.setState({[`${item}`]: store });
 }
 
+const updateItem = (data) => {
+  let store = JSON.parse(sessionStorage.getItem('store'));
+  let newStore = store.map(todo => {
+    if (todo.id === data.item.props.id){
+      todo.description = data.description
+    }
+    return todo;
+  });
+
+  sessionStorage.setItem('store', JSON.stringify(newStore));
+}
+
 export function dispatch(event, item, scope) {
   switch (event) {
     case 'ADD':
-      addItem(item, scope);
+      addItem(item);
       break;
     case 'FETCH':
       fetch(item, scope);
@@ -62,10 +74,13 @@ export function dispatch(event, item, scope) {
       refresh(item, scope);
       break;
     case 'DELETE':
-      deleteItem(item, scope);
+      deleteItem(item);
       break;
     case 'TOGGLE':
       toggleItem(item);
+      break;
+    case 'UPDATE':
+      updateItem(item);
       break;
     default:
       return;
