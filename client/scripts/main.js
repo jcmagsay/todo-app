@@ -1,28 +1,22 @@
-import '../styles/reset.css';
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import TodoService from 'services/todo-service';
+import reducer from 'reducers/index';
+// styles
+import 'styles/reset.css';
+import 'styles/elements.css';
+// app
+import App from 'scripts/app';
 
-const renderTodos = (todos) => {
-  const todoItems = [];
+const store = createStore(reducer);
 
-  todos.forEach(todo => {
-    todoItems.push([
-      '<li>',
-        `<label for="${ todo.id }">`,
-          `<input ${ todo.done ? 'checked' : '' } id="${ todo.id }" type="checkbox" />`,
-          todo.description,
-        '</label>',
-      '</li>',
-    ].join(''));
-  });
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
 
-  document.querySelector('#root').innerHTML = `<ul>${ todoItems.join('') }</ul>`;
-};
-
-const getTodos = () => {
-  return new Promise((resolve) => {
-    fetch('http://localhost:8004/api/todos')
-      .then(r => r.json())
-      .then(data => resolve(data));
-  });
-};
-
-document.addEventListener('DOMContentLoaded', () => getTodos().then(renderTodos));
+store.dispatch({ type: 'ADD', text: 'blah blah blah' })

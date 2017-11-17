@@ -2,29 +2,33 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
+const CLIENT_PATH = path.resolve(__dirname, './client');
+const PUBLIC_PATH = path.resolve(__dirname, './public');
+
 const config = {
   entry: {
-    app: './client/scripts/main.js',
+    app: `${CLIENT_PATH}/scripts/main.js`,
   },
   output: {
     filename: 'app.js',
-    path: path.join(__dirname, 'public')
+    path: PUBLIC_PATH
   },
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: __dirname + '/client/scripts',
-        loader: 'babel-loader',
+        test: /\.(js|jsx)$/,
+        include: `${CLIENT_PATH}/scripts`,
+        loader: 'babel',
+        options: { presets: ['es2015', 'react', 'stage-0'] }
       },
       {
         test: /\.css$/,
-        loader: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          fallback: 'style-loader',
+        loader: ['css-hot'].concat(ExtractTextPlugin.extract({
+          fallback: 'style',
           use: [
             {
-              loader: 'css-loader',
+              loader: 'css',
               options: {
                 sourceMap: true,
                 modules: true,
@@ -33,18 +37,18 @@ const config = {
               }
             },
             {
-              loader: 'postcss-loader',
+              loader: 'postcss',
             },
           ],
         })),
       },
       {
         test: /\.html/,
-        loader: 'html-loader',
+        loader: 'html',
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'file-loader',
+        loader: 'file',
         options: {
           hash: 'sha512',
           digest: 'hex',
@@ -61,11 +65,23 @@ const config = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['.css', '.js'],
+    'alias': {
+      'actions': `${CLIENT_PATH}/scripts/actions`,
+      'components': `${CLIENT_PATH}/scripts/components`,
+      'containers': `${CLIENT_PATH}/scripts/containers`,
+      'reducers': `${CLIENT_PATH}/scripts/reducers`,
+      'scripts': `${CLIENT_PATH}/scripts`,
+      'services': `${CLIENT_PATH}/scripts/services`,
+      'styles': `${CLIENT_PATH}/styles`
+    },
+    extensions: ['.css', '.js', '.jsx'],
     modules: [
       path.join(__dirname, 'src'),
       'node_modules',
     ],
+  },
+  'resolveLoader': {
+    'moduleExtensions': ['-loader']
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),

@@ -1,0 +1,40 @@
+/* ------------------------------------
+ ELEMENT STYLES
+--------------------------------------- */
+
+html {
+  font-family: 'Raleway Thin', 'Helvetica Neue', serif;
+  font-size: 62.5%;
+}
+
+body {
+  background: $COLOR_GRAY;
+  font-family: 'Raleway Thin', 'Helvetica Neue', serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  color: rgba($COLOR_BLUE, 0.7);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button {
+  appearance: none;
+  background: $COLOR_TRANSPARENT;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Helvetica Neue', serif;
+  font-size: 1.6rem;
+  height: auto;
+  outline: none;
+  padding: 0;
+  width: auto;
+}
+
+li {
+  list-style: none;
+}

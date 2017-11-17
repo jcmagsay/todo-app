@@ -18,12 +18,20 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "6.23.0",
+    "babel-preset-stage-0": "^6.24.1",
     "css-hot-loader": "^1.3.3",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
