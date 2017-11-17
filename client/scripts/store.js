@@ -1,7 +1,7 @@
 import TodoService from 'services/TodoService';
 const service = new TodoService();
 
-function fetch(item, scope) {
+const fetch = (item, scope) => {
   service.getAll().then(data => {
     let ids = data.map(item => item.id);
     let nextId = Math.max.apply(null, ids) + 1;
@@ -11,7 +11,7 @@ function fetch(item, scope) {
   });
 }
 
-function addItem(text) {
+const addItem = (text) => {
   let store = JSON.parse(sessionStorage.getItem('store'));
   const newItem = {
     id: nextId,
@@ -25,7 +25,7 @@ function addItem(text) {
   sessionStorage.setItem('nextId', nextId)
 }
 
-function toggleItem(item) {
+const toggleItem = (item) => {
   let store = JSON.parse(sessionStorage.getItem('store'));
 
   let newStore = store.map(todo => {
@@ -38,14 +38,14 @@ function toggleItem(item) {
   sessionStorage.setItem('store', JSON.stringify(newStore));
 }
 
-function deleteItem(id) {
+const deleteItem = (id) => {
   let store = JSON.parse(sessionStorage.getItem('store'));
   let newStore = store.filter(item => item.id != id);
 
   sessionStorage.setItem('store', JSON.stringify(newStore));
 }
 
-function refresh(item, scope) {
+const refresh = (item, scope) => {
   let store = JSON.parse(sessionStorage.getItem('store'));
   scope.setState({[`${item}`]: store });
 }

@@ -1,48 +1,50 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import Textfield from 'components/textfield';
 
 export default class TodoList extends Component {
   constructor() {
     super();
 
     this.state = {
-      value: ''
+      value: '',
+      error: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    e.preventDefault();
-    this.setState({ value: e.target.value });
+    this.textChanged = this.textChanged.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!this.state.value) return;
-    this.props.add(this.state.value);
+    if (!this.state.value) {
+      this.setState({ error: true });
+    } else {
+      this.props.add(this.state.value);
+      this.setState({
+        value: '',
+        error: false
+      });
+    }
+  }
+
+  textChanged(val) {
+    this.setState({ value: val });
   }
 
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
         <p>Use the form below to add a new Todo item</p>
-        <fieldset>
-          <label htmlFor="new-todo">Description</label>
-          <input
-            id="new-todo"
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-          <span>Error: can't be blank</span>
-        </fieldset>
-        <div>
-          <button>
-            Add
-          </button>
-        </div>
+        <Textfield
+          id="new-todo"
+          error={this.state.error}
+          label="Todo Description"
+          type="text"
+          textChanged={this.textChanged}
+          value={this.state.value}
+        />
+        <button>Add</button>
       </form>
     );
   }
